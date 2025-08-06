@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MinorShield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* General styles... */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f9fb;
+      color: #333;
+    }
+
+    header {
+      background-color: #004b8d;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #0277bd;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0.3rem 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #015d91;
+    }
+
+    .hero, .precautions, .resources, .feedback {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .hero h2, .precautions h2, .resources h2, .feedback h2 {
+      color: #004b8d;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 1rem auto;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-left: 5px solid #0277bd;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+
+    .card h3 {
+      color: #0277bd;
+    }
+
+    .card ul {
+      margin-left: 1.5rem;
+    }
+
+    .feedback form,
+    .form-box form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feedback input,
+    .feedback textarea,
+    .form-box input {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .feedback button,
+    .form-box button {
+      padding: 0.8rem;
+      background: #0277bd;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .form-box button:hover {
+      background: #015d91;
+    }
+
+    footer {
+      background: #004b8d;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    /* Combined modal */
+    #formContainer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+    }
+
+    .form-box {
+      background: white;
+      max-width: 400px;
+      margin: 8% auto;
+      padding: 20px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .form-box h2 {
+      color: #004b8d;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-btns {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-btns button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      background: #eee;
+    }
+
+    .toggle-btns button.active {
+      background: #0277bd;
+      color: white;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>MinorShield</h1>
+    <p>Empowering safety for every child</p>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#good-touch">Good Touch & Bad Touch</a>
+    <a href="#resources">Resources</a>
+    <a href="#feedback">Feedback</a>
+    <a href="#" onclick="openForm()">Login / Register</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Welcome to MinorShield</h2>
+    <p>We are dedicated to providing tools, education, and awareness to ensure the safety and well-being of minors in both digital and physical environments.</p>
+    <p><strong>Dear Parents:</strong> Your role is critical in your child’s safety. Teach your children about personal boundaries, how to say “No” when they feel uncomfortable, and ensure they understand the difference between good and bad touch.</p>
+    <p>Be open, friendly, and approachable — your child should feel safe sharing any problem with you. Monitor changes in their behavior, be aware of their surroundings (both online and offline), and stay informed about the latest child protection laws and support systems. Early communication and trust save lives.</p>
+  </section>
+
+  <section class="precautions" id="good-touch">
+    <h2>Good Touch & Bad Touch</h2>
+
+    <div class="card">
+      <h3>What is a Good Touch?</h3>
+      <ul>
+        <li>A hug from your parents when you're feeling happy</li>
+        <li>A handshake when greeting someone</li>
+        <li>A pat on the back from a teacher or friend</li>
+        <li>A doctor’s check-up (with parent permission)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>What is a Bad Touch?</h3>
+      <ul>
+        <li>Touching private parts without consent</li>
+        <li>Being asked to keep a touch a secret</li>
+        <li>Someone forcing you to hug or kiss</li>
+        <li>Any touch that makes you feel scared or uncomfortable</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>PDF Resource</h3>
+      <p><a href="C:\Users\roopa nursing home\Downloads\good-touch-bad-touch.pdf" target="_blank">📄 View / Download Good Touch & Bad Touch Guide</a></p>
+    </div>
+  </section>
+
+  <section class="resources" id="resources">
+    <h2>Resources for Child Safety</h2>
+
+    <div class="card">
+      <h3>Steps Taken by the Government</h3>
+      <ul>
+        <li><strong>POCSO Act (2012):</strong> Protects children from sexual offenses.</li>
+        <li><strong>Childline 1098:</strong> 24x7 helpline for children in distress.</li>
+        <li><strong>Operation Smile:</strong> Rescues missing and trafficked children.</li>
+        <li><strong>Beti Bachao Beti Padhao:</strong> Supports girl safety and education.</li>
+        <li><strong>School Safety Guidelines:</strong> Enforces safe school environments.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Whom to Contact If You Feel Unsafe</h3>
+      <ul>
+        <li><strong>Parents:</strong> Always share your feelings and problems with them.</li>
+        <li><strong>Teachers or School Counselor:</strong> Trusted adults at school are there to help.</li>
+        <li><strong>Police:</strong> Dial <strong>100</strong> or visit the nearest station.</li>
+        <li><strong>Childline:</strong> Dial <strong>1098</strong> — free, confidential, and 24x7.</li>
+        <li><strong>Women & Child Welfare Dept:</strong> Visit your local office for legal support and protection.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="feedback" id="feedback">
+    <h2>Send Us Your Feedback</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Write your feedback here..." required></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </section>
+
+  <!-- Combined Sign In / Sign Up Modal -->
+  <div id="formContainer">
+    <div class="form-box">
+      <span class="close-btn" onclick="closeForm()">&times;</span>
+      <div class="toggle-btns">
+        <button id="btnSignin" class="active" onclick="switchForm('signin')">Sign In</button>
+        <button id="btnSignup" onclick="switchForm('signup')">Sign Up</button>
+      </div>
+
+      <form id="signinForm">
+        <h2>Sign In</h2>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+
+      <form id="signupForm" style="display:none;">
+        <h2>Sign Up</h2>
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 MinorShield. All rights reserved.
+  </footer>
+
+  <script>
+    function openForm() {
+      document.getElementById("formContainer").style.display = "block";
+      switchForm('signin');
+    }
+
+    function closeForm() {
+      document.getElementById("formContainer").style.display = "none";
+    }
+
+    function switchForm(type) {
+      const signinForm = document.getElementById("signinForm");
+      const signupForm = document.getElementById("signupForm");
+      const btnSignin = document.getElementById("btnSignin");
+      const btnSignup = document.getElementById("btnSignup");
+
+      if (type === 'signin') {
+        signinForm.style.display = "block";
+        signupForm.style.display = "none";
+        btnSignin.classList.add("active");
+        btnSignup.classList.remove("active");
+      } else {
+        signinForm.style.display = "none";
+        signupForm.style.display = "block";
+        btnSignin.classList.remove("active");
+        btnSignup.classList.add("active");
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
